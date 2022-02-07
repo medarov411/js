@@ -7,43 +7,97 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <p id="year"></p>
-        <p id="day-of-week"></p>
-        <p id="day"></p>
-        <p id="month"></p>
-        <p id="time"></p>
+    <form name="myForm" id="myForm" method="post">
+        <label>Username</label>
+        <input type="text" id="name" oninput="validateForm();"/><br />
+        <span id="nameErrMsg" class="error"></span><br />
+        <label>Password</label>
+        <input type="text" id="pass" oninput="validateForm();"/> <br />
+        <span id="nameErrMsg2" class="error"></span><br />
+        <label>Repeat password</label>
+        <input type="text" id="pass2" oninput="validateForm();"/><br />
+        <span id="nameErrMsg3" class="error"></span>
+
+    </form>
+      <button id="validateTestButton" disabled>Validate now</button>
     
-    </div>
-   
-    <div>
-        <p id="days-left"></p>
-    </div>
-
-    <div>
-        <div>
-            <span>1st Number: </span>
-            <input id="int1" type="number" name="number">
-        </div>
-        <div style="margin: 10px 0 10px 0;">
-            <span>2nd Number: </span>
-            <input id="int2" type="number" name="number">
-        </div>
-
-        <div>
-            <button id="multiply-btn">Multiply</button>
-            <button id="divide-btn">Divide</button>
-        </div>
-
-        <div>
-            <p>The Result Is: </p>
-            <p id="result"></p>
-        </div>
-        
-    </div>
-  
+      <script>
+ validateForm = function () {
+        return check();
+    }
+    
+    function check() {
+        var x = document.myForm;
+        var input = x.name.value;
+        var pass = x.pass.value;
+        var repPass = x.pass2.value;
+        var disabledButton = document.getElementById('validateTestButton');
+        var errMsgHolder = document.getElementById('nameErrMsg');
+        var errMsgHolder2 = document.getElementById('nameErrMsg2');
+        var errMsgHolder3 = document.getElementById('nameErrMsg3');
+        var successMsg;
 
 
-    <script src="main.js"></script>
+       if(input.length == 0) {
+            errMsgHolder.innerHTML = "Empty field is not allowed!"
+            
+       }
+       else if(input.length > 0) {
+            errMsgHolder.innerHTML = "";
+       }
+       if(pass.length == 0) {
+                errMsgHolder2.innerHTML = "Empty field is not allowed!";
+        }
+        else if(pass.length > 0) {
+            errMsgHolder2.innerHTML = "";
+        }
+
+        if(repPass.length == 0) {
+                errMsgHolder3.innerHTML = "Empty field is not allowed!";
+        }
+        else if(repPass.length > 0) {
+            errMsgHolder3.innerHTML = "";
+            if(pass != repPass) {
+                errMsgHolder3.innerHTML = "Passwords are different!";
+            }
+        }
+
+        if(input.length > 0) {
+            if(pass.length > 0) {
+                if(repPass.length > 0)  {
+                    if(pass == repPass) {
+                        disabledButton.removeAttribute("disabled");
+                        disabledButton.classList.add("successMsg")
+                        successMsg = document.querySelector(".successMsg");
+                        successMsg.onclick = function() {
+                            document.write("You have successfully registered!")
+                        }
+                    }
+                    else {
+                        disabledButton.setAttribute("disabled","");
+                    }
+                }
+                else {
+                    disabledButton.setAttribute("disabled","");
+                }
+            }
+            else {
+                disabledButton.setAttribute("disabled","");
+            }
+       }
+        else {
+            disabledButton.setAttribute("disabled","");
+        }
+    }
+    
+      </script>
+    
+    <style> 
+    .error {
+    color: #E00000;
+     }
+
+    
+    </style>
 </body>
 </html>
