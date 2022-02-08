@@ -38,21 +38,21 @@
         var successMsg;
 
 
-       if(input.length == 0) {
+       if(input.length == 0 || input.indexOf(' ')>=0) {
             errMsgHolder.innerHTML = "Empty field is not allowed!"
             
        }
        else if(input.length > 0) {
             errMsgHolder.innerHTML = "";
        }
-       if(pass.length == 0) {
+       if(pass.length == 0 || pass.indexOf(' ')>=0) {
                 errMsgHolder2.innerHTML = "Empty field is not allowed!";
         }
         else if(pass.length > 0) {
             errMsgHolder2.innerHTML = "";
         }
 
-        if(repPass.length == 0) {
+        if(repPass.length == 0 || repPass.indexOf(' ')>=0) {
                 errMsgHolder3.innerHTML = "Empty field is not allowed!";
         }
         else if(repPass.length > 0) {
@@ -62,9 +62,9 @@
             }
         }
 
-        if(input.length > 0) {
-            if(pass.length > 0) {
-                if(repPass.length > 0)  {
+        if(input.length > 0 && input.indexOf(' ')<0) {
+            if(pass.length > 0 && pass.indexOf(' ')<0) {
+                if(repPass.length > 0 && repPass.indexOf(' ')<0)  {
                     if(pass == repPass) {
                         disabledButton.removeAttribute("disabled");
                         disabledButton.classList.add("successMsg")
